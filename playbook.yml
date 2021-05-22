@@ -1,0 +1,22 @@
+---
+- hosts: all
+  become: yes
+
+  tasks:
+  - name: Ensure chrony (for time sync) is installed.
+    yum:
+      name: chrony
+      state: present
+  - name: Ensure chrony is running.
+    service:
+      name: chronyd
+      state: started
+      enabled: yes
+  - name: Ensure dnsmasq (for dhcp service) is installed.
+    yum:
+      name: dnsmasq
+      state: present
+  - name: Ensure TFTP (for PXE boot) is installed.
+    yum:
+      name: syslinux-tftpboot
+      state: present
